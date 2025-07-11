@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+
+
+
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Bio</title>
+  <style>
+
+    
+
+    .icon-tooltip img {
+  width: 32px;   /* lub 24px, jeśli chcesz mniejsze */
+  height: 32px;
+}
+
+.icon-tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.icon-tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 10;
+}
+
+.icon-tooltip:hover::after {
+  opacity: 1;
+}
+
+
+.owner-icon {
+  display: flex;
+  justify-content: center;
+  margin-top: 1px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  /* usuń background-color, padding, color itp. */
+}
+
+.owner-icon img {
+  width: 20px;
+  height: 20px;
+}
+
+
+.owner-icon img {
+  width: 20px;
+  height: 20px;
+}
+
+
+    
+.description {
+  font-family: 'Poppins', 'Fira Code';
+  font-size: 20px;
+  color: white;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+.badge-container {
+  position: relative;
+  display: inline-block;
+  margin-top: 12px;
+}
+
+.badge-icon {
+  width: 25px;
+  height: 25px;
+  border: 2px solid #000; /* czarna ramka */
+  border-radius: 10px;
+  background-color: #000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  object-fit: cover;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.badge-icon:hover {
+  transform: scale(1.08);
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000;
+  color: #fff;
+  padding: 3px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.badge-container:hover .tooltip {
+  opacity: 1;
+}
+
+
+.icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+  margin: 0 10px;
+}
+
+.icon:hover {
+  transform: scale(1.2);
+}
+
+
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    .tooltip-text {
+  position: relative;
+  cursor: default;
+}
+
+.tooltip-text::after {
+  content: "UID 0";
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+  color: white;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.tooltip-text:hover::after {
+  opacity: 1;
+}
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', monospace;
+      color: #ffffff;
+      overflow: hidden;
+      background-color: #0f0f0f;
+    }
+
+    video.bg-video {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .container 
+
+
+    {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+      opacity: 1;
+      transition: opacity 1s ease;
+    }
+
+    .container.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .card {
+  background-color: rgba(0, 0, 0, 0.7); /* mniej przezroczyste */
+  border-radius: 25px;
+  padding: 40px 30px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transition: transform 0.1s ease-out;
+  perspective: 1000px;
+  will-change: transform;
+  max-width: 600px;
+  width: 90vw;
+  text-align: center;
+}
+
+
+    img.avatar {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      white-space: nowrap;
+      border-right: 3px solid #ffffff;
+      overflow: hidden;
+      width: fit-content;
+      margin: 0 auto 20px auto;
+      letter-spacing: 2px;
+      height: 1.2em; /* żeby nie skakało */
+    }
+
+    p {
+      font-size: 1.9em;
+      max-width: 600px;
+      line-height: 1.5;
+      margin: 10px 0;
+    }
+
+    .rgb-text {
+      background: linear-gradient(270deg, red , green, cyan, blue, violet, red);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rgbShift 6s linear infinite;
+      font-weight: bold;
+    }
+
+    a.rgb-text {
+      text-decoration: none;
+    }
+
+    a.rgb-text:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes rgbShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .music-player {
+      margin-top: 30px;
+      background: rgba(0, 0, 0, 0.07);
+      border-radius: 20px;
+      padding: 15px 20px;
+      width: 320px;
+      color: white;
+      user-select: none;
+      box-shadow: 0 0 10px rgba(255,255,255,0.15);
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .track-info {
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+
+    .controls button {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      border-radius: 8px;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      user-select: none;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .controls button:hover {
+      color: #000000;
+      border-color: #000000;
+    }
+
+    #seekBar {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 150px;
+      height: 12px;
+      border-radius: 50px;
+      background: transparent;
+      cursor: pointer;
+      outline: none;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    #seekBar::-webkit-slider-runnable-track {
+      height: 12px;
+      background: transparent;
+    }
+
+    #seekBar::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid black;
+      cursor: pointer;
+      margin-top: -3px;
+      transition: background-color 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    #seekBar::-moz-range-track {
+      background: transparent;
+      height: 12px;
+    }
+
+    #seekBar::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid black;
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+    }
+
+    .time {
+      text-align: center;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    #volumeContainer {
+      width: 320px;
+      margin: 10px auto 0 auto;
+      display: flex;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    #volumeContainer.visible {
+      opacity: 1;
+    }
+
+    #volumeSlider {
+      width: 150px;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 12px;
+      border-radius: 50px;
+      background: transparent;
+      cursor: pointer;
+      outline: none;
+    }
+
+    #volumeSlider::-webkit-slider-runnable-track {
+      height: 12px;
+      background: transparent;
+    }
+
+    #volumeSlider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgb(0, 26, 255);
+      border: 2px solid white;
+      cursor: pointer;
+      margin-top: -3px;
+      position: relative;
+      z-index: 2;
+      transition: background-color 0.3s ease;
+    }
+
+    #volumeSlider::-moz-range-track {
+      background: transparent;
+      height: 12px;
+    }
+
+    #volumeSlider::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgb(38, 0, 255);
+      border: 2px solid rgb(4, 0, 255);
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+      transition: background-color 0.3s ease;
+    }
+
+    .music-player:hover + #volumeContainer,
+    #volumeContainer:hover {
+      opacity: 1;
+    }
+
+    #overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.8);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2.5em;
+      cursor: pointer;
+      user-select: none;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    #overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <video autoplay muted loop class="bg-video">
+    <source src="background2.mp4" />
+    Twoja przeglądarka nie obsługuje wideo w tle.
+  </video>
+
+  <div id="overlay">click to reveal</div>
+
+  <div class="container" id="bioContainer" style="display:none;">
+
+    <div class="card" id="cardBox">
+
+      <img src="https://i.pinimg.com/736x/49/60/a6/4960a68ca72d24c20794cdbe1bf504b0.jpg" alt="Avatar" class="avatar" />
+     <div class="owner-icon">
+  <span></span>
+</div>
+
+      <div class="badge-container">
+  <div class="tooltip">Owner</div>
+  <img src="https://media.discordapp.net/attachments/1089279334872776886/1393218928611823646/crown.gif?ex=68725fbd&is=68710e3d&hm=39aa4fa4135efc848c0ad303333a845ea5fff334381fa16e46b2ae3a774684fc&=" alt="Owner Badge" class="badge-icon" />
+</div>
+
+
+      <h1 id="typewriter"><span id="typewriterText" class="tooltip-text"></span></h1>
+
+      <div class="description">
+  <br>
+  
+  <br>
+   
+</div>
+
+
+      <p class="rgb-text">
+     
+<div class="links">
+  <div class="icon-tooltip" data-tooltip="Go to Discord">
+    <a href="https://discord.gg/Nj8xpRdrvt" target="_blank">
+      <img src="https://media.discordapp.net/attachments/1089279334872776886/1393218927387086990/dc_copy.gif?ex=68725fbd&is=68710e3d&hm=f220a07dd2224229b515009c209918749a1f32159c6e7c39ead8c5db7997bb67&=" alt="Discord" />
+    </a>
+  </div>
+
+  <div class="icon-tooltip" data-tooltip="Go to Steam">
+    <a href="https://steamcommunity.com/id/xyznoseemeebrother" target="_blank">
+      <img src="https://media.discordapp.net/attachments/1089279334872776886/1393218929308074115/steam_copy.gif?ex=68725fbd&is=68710e3d&hm=a7a5075212cdea5372e57a31979b471efe30cc9cb1037f31163a27b842dc2dcf&=" alt="Steam" />
+    </a>
+  </div>
+</div>
+<div class="icon-tooltip" data-tooltip="Go to isvvs guns.lol profile">
+    <a href="https://guns.lol/1svvs" target="_blank">
+      <img src="Dolphin.gif" />
+    </a>
+  </div>
+</div>
+
+
+
+
+
+
+    <div class="music-player">
+      <div class="track-info" id="trackName">• slarency - empty.mp3 •</div>
+      <div class="controls">
+        <button id="playPauseBtn" aria-label="Play/Pause">▶︎</button>
+        <input type="range" id="seekBar" value="0" min="0" step="1" />
+      </div>
+      <div class="time">
+        <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
+      </div>
+    </div>
+
+    <div id="volumeContainer">
+      <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.3" />
+    </div>
+
+    <audio id="bgMusic" loop>
+      <source src="music.mp3" type="audio/mpeg" />
+      Twoja przeglądarka nie obsługuje audio.
+    </audio>
+
+  </div>
+
+<script>
+  // Typewriter efekt z pętlą, poprawiony, działa na elemencie #typewriter
+  const text = "cvcxyzz bio's";
+  const el = document.getElementById("typewriterText");
+  let i = 0;
+  let isDeleting = false;
+
+  function typeWriter() {
+    if (!isDeleting) {
+      el.textContent = text.substring(0, i + 1);
+      i++;
+      if (i === text.length) {
+        isDeleting = true;
+        setTimeout(typeWriter, 1000);
+      } else {
+        setTimeout(typeWriter, 150);
+      }
+    } else {
+      el.textContent = text.substring(0, i - 0,1);
+      i--;
+      if (i === 0) {
+        isDeleting = false;
+        setTimeout(typeWriter, 500);
+      } else {
+        setTimeout(typeWriter, 100);
+      }
+    }
+  }
+
+  // Zaczynamy typowanie dopiero po kliknięciu overlay
+
+  const overlay = document.getElementById("overlay");
+  const bioContainer = document.getElementById("bioContainer");
+  const audio = document.getElementById("bgMusic");
+  const playPauseBtn = document.getElementById("playPauseBtn");
+
+  overlay.addEventListener("click", () => {
+    overlay.classList.add("hidden");
+    // po animacji opacity ukrywamy overlay zupełnie
+    setTimeout(() => {
+      overlay.style.display = "none";
+    }, 500);
+
+    bioContainer.style.display = "flex";  // pokaz bio
+
+    // start typewritera
+    typeWriter();
+
+    // ustaw głośność i zacznij muzykę
+    audio.volume = 0.1;
+    audio.play();
+    playPauseBtn.textContent = "⏸";
+  });
+
+  // Obsługa odtwarzacza audio
+
+  const seekBar = document.getElementById("seekBar");
+  const currentTimeEl = document.getElementById("currentTime");
+  const durationEl = document.getElementById("duration");
+  const volumeSlider = document.getElementById("volumeSlider");
+
+  audio.addEventListener("loadedmetadata", () => {
+    seekBar.max = Math.floor(audio.duration);
+    const durationMin = Math.floor(audio.duration / 60);
+    const durationSec = Math.floor(audio.duration % 60);
+    durationEl.textContent = `${durationMin}:${durationSec < 10 ? '0' + durationSec : durationSec}`;
+  });
+
+  audio.addEventListener("timeupdate", () => {
+    seekBar.value = Math.floor(audio.currentTime);
+
+    const currentMin = Math.floor(audio.currentTime / 60);
+    const currentSec = Math.floor(audio.currentTime % 60);
+    currentTimeEl.textContent = `${currentMin}:${currentSec < 10 ? '0' + currentSec : currentSec}`;
+  });
+
+  playPauseBtn.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+      playPauseBtn.textContent = "⏸";
+    } else {
+      audio.pause();
+      playPauseBtn.textContent = "▶︎";
+    }
+  });
+
+  seekBar.addEventListener("input", () => {
+    audio.currentTime = seekBar.value;
+  });
+
+  volumeSlider.addEventListener("input", () => {
+    audio.volume = volumeSlider.value;
+  });
+
+  // Efekt poruszania kartą za kursorem
+
+  const card = document.getElementById('cardBox');
+
+  document.addEventListener('mousemove', (e) => {
+    const centerX = window.innerWidth / 3;
+    const centerY = window.innerHeight / 3;
+    const offsetX = (e.clientX - centerX) / 35;
+    const offsetY = (e.clientY - centerY) / 35;
+
+    card.style.transform = `rotateY(${offsetX}deg) rotateX(${-offsetY}deg)`;
+  });
+
+  document.addEventListener('mouseleave', () => {
+    card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+  });
+</script>
+
+</body>
+</html>
