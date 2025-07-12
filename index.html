@@ -10,6 +10,13 @@
   <title>My Bio</title>
   <style>
 
+.verified-icon {
+  width: 25px;   /* szerokość ikony */
+  height: 25px;  /* wysokość ikony */
+  object-fit: contain; /* zachowuje proporcje */
+}
+
+
     .bio-text {
   margin-top: -10px; /* lub np. -5px, zależnie jak "lekko" chcesz */
 }
@@ -95,10 +102,10 @@
 .badge-icon {
   width: 25px;
   height: 25px;
-  border: 2px solid #000; /* czarna ramka */
+  border: 2px solid #00ccff; /* czarna ramka */
   border-radius: 10px;
-  background-color: #000;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  background-color: #00e1ff;
+  box-shadow: 0 2px 6px rgba(0, 183, 255, 10);
   object-fit: cover;
   transition: transform 0.2s ease;
   cursor: pointer;
@@ -152,7 +159,7 @@
 }
 
 .tooltip-text::after {
-  content: "UID 0";
+  content: "UID 0 i wiekszego nie bedzie";
   position: absolute;
   top: -35px;
   left: 50%;
@@ -211,10 +218,10 @@
     }
 
     .card {
-  background-color: rgba(0, 0, 0, 0.7); /* mniej przezroczyste */
+  background-color: rgba(255, 255, 255, 0.07); /* mniej przezroczyste */
   border-radius: 25px;
   padding: 40px 30px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(0, 238, 255, 1);
   transition: transform 0.1s ease-out;
   perspective: 1000px;
   will-change: transform;
@@ -493,10 +500,27 @@
   <span></span>
 </div>
 
+
+
       <div class="badge-container">
   <div class="tooltip">Owner</div>
   <img src="https://media.discordapp.net/attachments/1089279334872776886/1393218928611823646/crown.gif?ex=68725fbd&is=68710e3d&hm=39aa4fa4135efc848c0ad303333a845ea5fff334381fa16e46b2ae3a774684fc&=" alt="Owner Badge" class="badge-icon" />
 </div>
+
+      <div class="badge-container">
+  <div class="tooltip">Verifited</div>
+  <img src="https://media.discordapp.net/attachments/1255692212717752513/1332489266814783530/roblox-verified-verified.gif?ex=68724415&is=6870f295&hm=3ee8794f1f3aa4fcaa0cd1b3937ba90fd6510346ea19f0e6d2311bacf4ce6623&=" alt="Owner Badge" class="badge-icon" />
+</div>
+
+
+
+
+
+
+<!-- 👇 pusty wiersz oddzielający wizualnie -->
+
+
+
 
 
       <h1 id="typewriter"><span id="typewriterText" class="tooltip-text"></span></h1>
@@ -524,7 +548,7 @@ but I wanted to create my own little bio page for free.
 <div class="links">
   <div class="icon-tooltip" data-tooltip="Go to Discord">
     <a href="https://discord.gg/Nj8xpRdrvt" target="_blank">
-      <img src="https://media.discordapp.net/attachments/1089279334872776886/1393218927387086990/dc_copy.gif?ex=68725fbd&is=68710e3d&hm=f220a07dd2224229b515009c209918749a1f32159c6e7c39ead8c5db7997bb67&=" alt="Discord" />
+      <img src="https://media.discordapp.net/attachments/1255692212717752513/1294102326423978104/Group_123.png?ex=68725c75&is=68710af5&hm=985e69ea711cf26781f527ce3baa105e966f4a9071cece37a3103bc2f12608f4&=&format=webp&quality=lossless&width=872&height=872" alt="Discord" />
     </a>
   </div>
 
