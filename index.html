@@ -10,6 +10,13 @@
   <title>My Bio</title>
   <style>
 
+.music-player {
+  position: relative; /* ← to pozwala z-index zadziałać */
+  z-index: 2; /* ← wyżej niż bg-darken (który ma z-index: 0) */
+}
+
+
+
 .verified-icon {
   width: 25px;   /* szerokość ikony */
   height: 25px;  /* wysokość ikony */
@@ -113,6 +120,21 @@
 
 .badge-icon:hover {
   transform: scale(1.08);
+}
+
+.bg-darken {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.65); /* mocniejsze przyciemnienie */
+  z-index: 0; /* umieszczone nad video, pod resztą */
+  pointer-events: none;
+}
+
+.bg-video {
+  z-index: -1 !important; /* upewniamy się że video zostaje najniżej */
 }
 
 .tooltip {
@@ -484,10 +506,13 @@
 </head>
 <body>
 
-  <video autoplay muted loop class="bg-video">
-    <source src="background2.mp4" />
-    Twoja przeglądarka nie obsługuje wideo w tle.
-  </video>
+<video autoplay muted loop class="bg-video">
+  <source src="background2.mp4" />
+  Twoja przeglądarka nie obsługuje wideo w tle.
+</video>
+
+<div class="bg-darken"></div> <!-- <- to dodaje ciemność -->
+
 
   <div id="overlay">click to reveal</div>
 
@@ -504,7 +529,7 @@
 
       <div class="badge-container">
   <div class="tooltip">Owner</div>
-  <img src="https://media.discordapp.net/attachments/1089279334872776886/1393218928611823646/crown.gif?ex=68725fbd&is=68710e3d&hm=39aa4fa4135efc848c0ad303333a845ea5fff334381fa16e46b2ae3a774684fc&=" alt="Owner Badge" class="badge-icon" />
+  <img src="crown.gif" alt="Owner Badge" class="badge-icon" />
 </div>
 
       <div class="badge-container">
@@ -548,14 +573,14 @@ but I wanted to create my own little bio page for free.
 <div class="links">
   <div class="icon-tooltip" data-tooltip="Go to Discord">
     <a href="https://discord.gg/Nj8xpRdrvt" target="_blank">
-      <img src="https://media.discordapp.net/attachments/1255692212717752513/1294102326423978104/Group_123.png?ex=68725c75&is=68710af5&hm=985e69ea711cf26781f527ce3baa105e966f4a9071cece37a3103bc2f12608f4&=&format=webp&quality=lossless&width=872&height=872" alt="Discord" />
+      <img src="dc_copy.gif" alt="Discord" />
     </a>
   </div>
 
 
   <div class="icon-tooltip" data-tooltip="Go to Steam">
     <a href="https://steamcommunity.com/id/xyznoseemeebrother" target="_blank">
-      <img src="https://media.discordapp.net/attachments/1089279334872776886/1393218929308074115/steam_copy.gif?ex=68725fbd&is=68710e3d&hm=a7a5075212cdea5372e57a31979b471efe30cc9cb1037f31163a27b842dc2dcf&=" alt="Steam" />
+      <img src="steam_copy" alt="Steam" />
     </a>
   </div>
 </div>
@@ -706,4 +731,6 @@ but I wanted to create my own little bio page for free.
 </script>
 
 </body>
+
+
 </html>
