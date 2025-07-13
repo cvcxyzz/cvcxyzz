@@ -11,6 +11,65 @@
   <style>
 
 .music-player {
+  background: rgb(0, 183, 255);
+  border: 5px solid rgba(4, 0, 255, 0.418);
+  width: 100%;
+  max-width: 600px;
+}
+
+
+.music-player {
+  width: 100%;
+  max-width: 600px; /* Dostosuj do szerokości "bio" */
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+}
+
+.track-info {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.controls button {
+  padding: 10px;
+  font-size: 16px;
+  background: none;
+  border: 2px solid white;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+#seekBar {
+  flex-grow: 1;
+  max-width: 300px;
+}
+
+.time {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.volume {
+  margin-top: 10px;
+}
+
+
+.music-player {
   position: relative; /* ← to pozwala z-index zadziałać */
   z-index: 2; /* ← wyżej niż bg-darken (który ma z-index: 0) */
 }
@@ -181,7 +240,7 @@
 }
 
 .tooltip-text::after {
-  content: "UID 0";
+  content: "UID 0 i wiekszego nie bedzie";
   position: absolute;
   top: -35px;
   left: 50%;
@@ -573,7 +632,7 @@ but I wanted to create my own little bio page for free.
 <div class="links">
   <div class="icon-tooltip" data-tooltip="Go to Discord">
     <a href="https://discord.gg/Nj8xpRdrvt" target="_blank">
-      <img src="dc_copy.gif" alt="Discord" />
+      <img src="dc_copy.gif"Discord" />
     </a>
   </div>
 
@@ -595,28 +654,28 @@ but I wanted to create my own little bio page for free.
 
 
 
+<div class="music-player">
+  <div class="track-info">• Paris Freestylee •</div>
 
-    <div class="music-player">
-      <div class="track-info" id="trackName">• OIO - Biggie.mp3 •</div>
-      <div class="controls">
-        <button id="playPauseBtn" aria-label="Play/Pause">▶︎</button>
-        <input type="range" id="seekBar" value="0" min="0" step="1" />
-      </div>
-      <div class="time">
-        <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
-      </div>
-    </div>
-
-    <div id="volumeContainer">
-      <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.3" />
-    </div>
-
-    <audio id="bgMusic" loop>
-      <source src="OIO - Biggie.mp3" type="audio/mpeg" />
-      Twoja przeglądarka nie obsługuje audio.
-    </audio>
-
+  <div class="controls">
+    <button id="playPauseBtn" aria-label="Play/Pause">⏸️</button>
+    <input type="range" id="seekBar" value="0" min="0" max="100" step="1" />
   </div>
+
+  <div class="time">
+    <span id="currentTime">0:00</span> / <span id="duration">3:03</span>
+  </div>
+
+  <div class="volume">
+    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.3" />
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="Paris Freestylee.mp3" type="audio/mpeg" />
+    Twoja przeglądarka nie obsługuje audio.
+  </audio>
+</div>
+
 
 <script>
   // Typewriter efekt z pętlą, poprawiony, działa na elemencie #typewriter
